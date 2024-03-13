@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
@@ -24,6 +26,10 @@ public class Main {
         for (Vehiculo vehiculo : listaVehiculos) {
             System.out.println(vehiculo);
         }
+        
+        System.out.println("------------------------");
+        System.out.println("Estructura Map: ");
+        System.out.println(mostrarListaPalabrasContadas(vehiculos));
 //        List<Vehiculo> vehiculos2 
                 
 //        
@@ -66,5 +72,22 @@ public class Main {
         }
                 
         return vehiculos;
+    }
+    public static Map<Integer,Integer> mostrarListaPalabrasContadas(List<String> lista){
+        Map<Integer,Integer> listaMap = new TreeMap();
+        int contadorLineas = 2;
+        int contadorPalabras = 0;
+        for(String linea : lista){
+            String[] array = linea.split(",");
+            for(String palabra : array){
+                String[] palabras = palabra.split("\\n+");
+                contadorPalabras += palabras.length;
+            }
+            listaMap.put(contadorLineas, contadorPalabras);
+            contadorLineas++;
+            contadorPalabras = 0; // lo reseto para no afectar la siguiente linea
+        }
+        
+        return listaMap;
     }
 }
